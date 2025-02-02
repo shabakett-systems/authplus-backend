@@ -8,6 +8,7 @@ import { useI18n } from 'vue-i18n';
 type Credentials = {
 	email: string;
 	password: string;
+	first_name: string;
 };
 
 const { t } = useI18n();
@@ -23,7 +24,7 @@ const emit = defineEmits<{
 const errorFormatted = computed(() => {
 	// Show "Wrong username or password" for wrongly formatted emails as well
 	if (error.value === ErrorCode.InvalidPayload) {
-		return translateAPIError(ErrorCode.InvalidCredentials);
+		return translateAPIError(ErrorCode.InvalidPayload);
 	}
 
 	if (error.value) {
@@ -37,7 +38,7 @@ async function onSubmit() {
 	// Simple RegEx, not for validation, but to prevent unnecessary login requests when the value is clearly invalid
 	const emailRegex = /^\S+@\S+$/;
 
-	if (email.value === null || !emailRegex.test(email.value) || password.value === null) {
+	if (email.value === null || !emailRegex.test(email.value) || password.value === null || firstName.value === null) {
 		error.value = ErrorCode.InvalidPayload;
 		return;
 	}
@@ -48,6 +49,7 @@ async function onSubmit() {
 		const credentials: Credentials = {
 			email: email.value,
 			password: password.value,
+			first_name: firstName.value,
 		};
 
 		await api.post('/users/register', credentials);
@@ -73,6 +75,13 @@ async function onSubmit() {
 			:disabled="isLoading"
 		/>
 		<interface-system-input-password :value="password" :disabled="isLoading" @input="password = $event" />
+
+		<v-input
+			v-model="firstName"
+			type="text"
+			:placeholder="t('name')"
+			:disabled="isLoading"
+		/>
 
 		<v-notice v-if="error" type="warning">
 			{{ errorFormatted }}
