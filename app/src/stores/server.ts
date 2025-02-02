@@ -143,7 +143,12 @@ export const useServerStore = defineStore('serverStore', () => {
 			(options?.isLanguageUpdated &&
 				(!('language' in currentUser) || ('language' in currentUser && !currentUser?.language)))
 		) {
-			await setLanguage(unref(info)?.project?.default_language ?? 'en-US');
+			//await setLanguage(unref(info)?.project?.default_language ?? 'en-US');
+			
+			const urlParams = new URLSearchParams(window.location.search);
+			const languageParam = urlParams.get('lang');
+			if (languageParam) localStorage.setItem('lang', languageParam);
+            await setLanguage(localStorage.getItem('lang') || unref(info)?.project?.default_language || 'en-US');
 		}
 
 		if (serverInfoResponse.data.data?.rateLimit !== undefined) {
