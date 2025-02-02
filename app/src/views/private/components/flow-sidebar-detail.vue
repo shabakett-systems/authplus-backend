@@ -203,7 +203,7 @@ const runManualFlow = async (flowId: string) => {
 					@click="onFlowClick(manualFlow.id)"
 				>
 					<v-icon :name="manualFlow.icon ?? 'bolt'" small left />
-					{{ manualFlow.name }}
+					{{ t(manualFlow.name) }}
 				</v-button>
 			</div>
 		</div>
@@ -218,7 +218,7 @@ const runManualFlow = async (flowId: string) => {
 						{{ t('cancel') }}
 					</v-button>
 					<v-button :disabled="isConfirmButtonDisabled" @click="confirmUnsavedChanges(confirmRunFlow!)">
-						{{ confirmButtonCTA }}
+						{{ confirmDetails!.description }}
 					</v-button>
 				</v-card-actions>
 			</v-card>
@@ -243,7 +243,7 @@ const runManualFlow = async (flowId: string) => {
 						{{ t('cancel') }}
 					</v-button>
 					<v-button :disabled="isConfirmButtonDisabled" @click="runManualFlow(confirmRunFlow!)">
-						{{ confirmButtonCTA }}
+						{{ confirmDetails!.description }}
 					</v-button>
 				</v-card-actions>
 			</v-card>
