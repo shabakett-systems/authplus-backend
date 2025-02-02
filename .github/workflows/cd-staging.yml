@@ -1,0 +1,19 @@
+name: Deploy STAGING
+
+on:
+  workflow_dispatch: # trigger manually
+
+permissions:
+  contents: read
+  packages: write
+  attestations: write
+  id-token: write
+  
+jobs:
+  deploy:
+    uses: ./.github/workflows/cd-common.yml
+    with:
+      BRANCH: staging
+      IMAGE_SUFFIX: -stg
+    secrets:
+      DEPLOY_HOOK: ${{ secrets.DEPLOY_HOOK_STG }}
