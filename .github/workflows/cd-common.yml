@@ -1,0 +1,53 @@
+name: ~deploy-common
+
+on:
+  workflow_call:
+    inputs:
+      BRANCH:
+        required: true
+        type: string
+      IMAGE_SUFFIX:
+        required: true
+        type: string
+    secrets:
+       DEPLOY_HOOK:
+        required: true
+        
+permissions:
+  contents: read
+  packages: write
+  attestations: write
+  id-token: write
+      
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Set timezone
+        run: |
+          sudo timedatectl set-timezone Africa/Algiers
+          sudo systemctl restart syslog
+          
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.BRANCH }} 
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}${{ inputs.IMAGE_SUFFIX }}:latest .
+          docker push ghcr.io/${{ github.repository }}${{ inputs.IMAGE_SUFFIX }}:latest
+
+      - name: Deploy to VPS
+        run: |
+          curl ${{ secrets.DEPLOY_HOOK }}
+  
