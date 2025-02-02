@@ -1,8 +1,4 @@
-<p align="center"><img alt="Directus Logo" src="https://user-images.githubusercontent.com/522079/158864859-0fbeae62-9d7a-4619-b35e-f8fa5f68e0c8.png"></p>
-
----
-
-## 🐰 Introduction
+## Introduction
 
 Directus is a real-time API and App dashboard for managing SQL database content.
 
@@ -18,7 +14,7 @@ Directus is a real-time API and App dashboard for managing SQL database content.
 
 <br />
 
-## 🚀 Directus Cloud
+## Directus Cloud
 
 [Directus Cloud](https://directus.io/pricing) allows you to create projects, hosted by the Directus team, from
 $15/month.
@@ -31,7 +27,7 @@ $15/month.
 
 <br />
 
-## 🤔 Community Help
+## Community Help
 
 [The Directus Documentation](https://docs.directus.io) is a great place to start, or explore these other channels:
 
@@ -43,7 +39,7 @@ $15/month.
 
 <br />
 
-## ❤️ Contributing & Sponsoring
+## Contributing & Sponsoring
 
 Please read our [Contributing Guide](./contributing.md) before submitting Pull Requests.
 
