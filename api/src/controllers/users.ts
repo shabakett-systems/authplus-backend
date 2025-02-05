@@ -439,6 +439,7 @@ const registerSchema = Joi.object<RegisterUserInput>({
 	verification_url: Joi.string().uri(),
 	first_name: Joi.string(),
 	last_name: Joi.string(),
+	rc: Joi.string(),
 });
 
 router.post(

@@ -433,6 +433,7 @@ export class UsersService extends ItemsService {
 		const emailFilter = settings?.['public_registration_email_filter'];
 		const first_name = input.first_name ?? null;
 		const last_name = input.last_name ?? null;
+		const rc = input.rc ?? null;
 
 		const partialUser: Partial<User> = {
 			// Required fields
@@ -443,6 +444,7 @@ export class UsersService extends ItemsService {
 			// Optional fields
 			first_name,
 			last_name,
+			rc,
 		};
 
 		if (emailFilter && validatePayload(emailFilter, { email: input.email }).length !== 0) {
@@ -490,6 +492,7 @@ export class UsersService extends ItemsService {
 							email: input.email,
 							first_name,
 							last_name,
+							rc,
 						},
 					},
 				})

@@ -116,8 +116,8 @@ const links = computed<Link[][]>(() => [
 			<v-divider v-if="index !== links.length - 1" :key="index" />
 		</template>
 
-		<v-list-item href="https://github.com/directus/directus/releases" class="version">
-			<v-list-item-icon><v-icon name="directus" /></v-list-item-icon>
+		<v-list-item href="https://github.com/shabakett-systems/authplus-backend" class="version">
+			<v-list-item-icon><v-icon name="code_blocks" /></v-list-item-icon>
 			<v-list-item-content>
 				<v-text-overflow class="version" :text="`Directus ${info.version}`" />
 			</v-list-item-content>

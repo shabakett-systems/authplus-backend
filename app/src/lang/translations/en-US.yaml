@@ -1337,6 +1337,7 @@ fields:
   directus_users:
     first_name: First Name
     last_name: Last Name
+    rc: Trade Register
     email: Email
     password: Password
     avatar: Avatar
