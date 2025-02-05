@@ -32,7 +32,6 @@ USER node
 ENV NODE_OPTIONS=--max-old-space-size=8192
 
 COPY pnpm-lock.yaml .
-RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm fetch
 
 COPY --chown=node:node . .
