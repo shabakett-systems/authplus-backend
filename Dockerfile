@@ -7,12 +7,16 @@ ARG NODE_VERSION=22
 
 FROM node:${NODE_VERSION}-alpine AS builder
 
+# Remove again once corepack >= 0.31 made it into base image
+# (see https://github.com/directus/directus/issues/24514)
+RUN npm install --global corepack@latest
+
 ARG TARGETPLATFORM
 RUN <<EOF
-  if [ "$TARGETPLATFORM" = 'linux/arm64' ]; then
-  	apk --no-cache add python3 build-base
-  	ln -sf /usr/bin/python3 /usr/bin/python
-  fi
+	if [ "$TARGETPLATFORM" = 'linux/arm64' ]; then
+		apk --no-cache add python3 build-base
+		ln -sf /usr/bin/python3 /usr/bin/python
+	fi
 EOF
 
 WORKDIR /directus
@@ -28,7 +32,6 @@ USER node
 ENV NODE_OPTIONS=--max-old-space-size=8192
 
 COPY pnpm-lock.yaml .
-RUN corepack enable && corepack prepare pnpm@latest --activate
 RUN pnpm fetch
 
 COPY --chown=node:node . .
