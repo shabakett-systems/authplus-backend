@@ -18,6 +18,7 @@ export type User = {
 	status: 'draft' | 'invited' | 'unverified' | 'active' | 'suspended' | 'archived';
 	first_name: string | null;
 	last_name: string | null;
+	rc: string | null;
 	email: string | null;
 	password: string | null;
 	token: string | null;
@@ -49,4 +50,5 @@ export type RegisterUserInput = {
 	verification_url?: string | null;
 	first_name?: User['first_name'];
 	last_name?: User['last_name'];
+	rc?: User['rc'];
 };

@@ -1307,6 +1307,7 @@ fields:
   directus_users:
     first_name: Prénom
     last_name: Nom
+    rc: Registre Commerce
     email: E-mail
     password: Mot de passe
     avatar: Avatar

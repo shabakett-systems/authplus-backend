@@ -1257,6 +1257,7 @@ fields:
   directus_users:
     first_name: الاسم الأول
     last_name: الاسم الأخير
+    rc: السجل التجاري
     email: البريد الإلكتروني
     password: كلمة المرور
     avatar: الصورةالرمزية
