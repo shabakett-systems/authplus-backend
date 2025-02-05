@@ -9,12 +9,17 @@ type Credentials = {
 	email: string;
 	password: string;
 	first_name: string;
+	rc: string;
 };
 
 const { t } = useI18n();
 const isLoading = ref(false);
+
 const email = ref<string | null>(null);
 const password = ref<string | null>(null);
+const firstName = ref<string | null>(null);
+const rc = ref<string | null>(null);
+
 const error = ref<RequestError | string | null>(null);
 
 const emit = defineEmits<{
@@ -38,7 +43,7 @@ async function onSubmit() {
 	// Simple RegEx, not for validation, but to prevent unnecessary login requests when the value is clearly invalid
 	const emailRegex = /^\S+@\S+$/;
 
-	if (email.value === null || !emailRegex.test(email.value) || password.value === null || firstName.value === null) {
+	if (email.value === null || !emailRegex.test(email.value) || password.value === null || firstName.value === null || rc.value === null) {
 		error.value = ErrorCode.InvalidPayload;
 		return;
 	}
@@ -50,6 +55,7 @@ async function onSubmit() {
 			email: email.value,
 			password: password.value,
 			first_name: firstName.value,
+			rc: rc.value,
 		};
 
 		await api.post('/users/register', credentials);
@@ -80,6 +86,13 @@ async function onSubmit() {
 			v-model="firstName"
 			type="text"
 			:placeholder="t('name')"
+			:disabled="isLoading"
+		/>
+
+		<v-input
+			v-model="rc"
+			type="text"
+			:placeholder="t('fields.directus_users.rc')"
 			:disabled="isLoading"
 		/>
 

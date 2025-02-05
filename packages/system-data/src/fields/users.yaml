@@ -31,8 +31,12 @@ fields:
 
   - field: avatar
     interface: file
-    width: full
+    width: half
     display: image
+
+  - field: rc
+    interface: input
+    width: half
 
   - field: location
     interface: input

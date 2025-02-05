@@ -13,6 +13,7 @@ export type DirectusUser<Schema = any> = MergeCoreCollection<
 		id: string; // uuid
 		first_name: string | null;
 		last_name: string | null;
+		rc: string | null;
 		email: string | null;
 		password: string | null; // will just be *s
 		location: string | null;
